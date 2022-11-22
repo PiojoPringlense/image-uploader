@@ -17,16 +17,19 @@ export default function Home() {
 		setIsUploading(true);
 		const config = {
 			onUploadProgress: (event) => {
-				setUploadProgress(Math.round((event.loaded * 100) / event.total));
+				setUploadProgress(Math.round((event.loaded * 50) / event.total));
 			},
 		};
 
-		const response = await axios.post("/api/images", formData, config);
+		const response = await axios.post("/api/upload", formData, config);
 		console.log(response);
 		if (response.status === 200) {
-			setIsUploading(false);
-			setIsUploaded(true);
 			setImageUrl(response.data.data);
+			setUploadProgress(100);
+			setTimeout(() => {
+				setIsUploading(false);
+				setIsUploaded(true);
+			}, 500);
 		} else {
 			setIsUploading(false);
 		}

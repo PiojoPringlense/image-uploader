@@ -7,6 +7,7 @@ const Progress = ({ progress }) => {
 			<div className={styles.progressContainer}>
 				<div className={styles.progressBar} style={{ width: `${progress}%` }}></div>
 			</div>
+			{progress < 50 ? <p>Uploading...</p> : <p>Processing...</p>}
 		</>
 	);
 };
